@@ -197,9 +197,9 @@ export function LinearIntensity(strOrValue: string | number, unit: LinearIntensi
     return Quantity(LinearIntensity.prototype, LinearIntensity.sanitize(strOrValue, unit), unit)
 }
 
-LinearIntensity.parse = function LinearIntensity_parse(str: string) {
+LinearIntensity.parse = function LinearIntensity_parse(str: string): [number, null] {
     const [value] = (str.match(/-?\d+(\.\d*)?/) || [])
-    return [parseInt(value), null] as const
+    return value ? [parseInt(value), null] : [0, null]
 }
 
 LinearIntensity.prototype.valueOf = function LinearIntensity_prototype_valueOf(this: Quantity, unit: LinearIntensityUnit = null) {
